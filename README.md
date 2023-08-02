@@ -4,14 +4,13 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| email              | string | null: false |
+| email              | string | null: false,unique: true|
 | encrypted_password | string | null: false |
-| password_confirmation | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | kana_last_name     | string | null: false |
 | kana_first_name    | string | null: false |
-| birthday          | integer | null: false |
+| birthday           | date | null: false |
 
 ### Association
 
@@ -23,42 +22,41 @@
 | ------------------ | ------ | ----------- |
 | product_name       | string | null: false |
 | description        | text   | null: false |
-| category           | string | null: false |
-| condition          | string | null: false |
-| shipping_fee_responsibility | string | null: false |
-| origin             | string | null: false |
-| days_to_ship       | string | null: false |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| shipping_fee_responsibility_id | integer | null: false |
+| prefecture_id      | integer | null: false |
+| days_to_ship_id    | integer | null: false |
 | price              | integer | null: false |
-| seller_id          | references | null: false foreign_key: true |
-| image             | text | null: false |
+| user               | references | null: false foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_one :orders
+- belongs_to :user
+- has_one :order
 
-## address テーブル
+## addresses テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | postal_code        | string | null: false |
-| prefecture         | string | null: false |
+| prefecture_id      | integer | null: false |
 | city               | string | null: false |
 | street_address     | string | null: false |
-| building_name      | string | null: false |
+| building_name      | string |             |
 | phone_number       | string | null: false |
-| orders_id | references | null: false foreign_key: true |
+| order             | references | null: false foreign_key: true |
 
 ### Association
 
-- belongs_to :orders
+- belongs_to :order
 
 ## orders テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| products_id        | string | references | null: false foreign_key: true |
-| buyer_id           | string | references | null: false foreign_key: true |
+| product            | string | references | null: false foreign_key: true |
+| user               | string | references | null: false foreign_key: true |
 ### Association
 
 - has_one :address
-- belongs_to :users
-- belongs_to :products
+- belongs_to :user
+- belongs_to :product
