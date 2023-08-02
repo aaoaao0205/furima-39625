@@ -1,24 +1,64 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| password_confirmation | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| kana_last_name     | string | null: false |
+| kana_first_name    | string | null: false |
+| birthday          | integer | null: false |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :products
+- has_many :orders
 
-* System dependencies
+## products テーブル
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| product_name       | string | null: false |
+| description        | text   | null: false |
+| category           | string | null: false |
+| condition          | string | null: false |
+| shipping_fee_responsibility | string | null: false |
+| origin             | string | null: false |
+| days_to_ship       | string | null: false |
+| price              | integer | null: false |
+| seller_id          | references | null: false foreign_key: true |
+| image             | text | null: false |
 
-* Configuration
+### Association
 
-* Database creation
+- belongs_to :users
+- has_one :orders
 
-* Database initialization
+## address テーブル
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| postal_code        | string | null: false |
+| prefecture         | string | null: false |
+| city               | string | null: false |
+| street_address     | string | null: false |
+| building_name      | string | null: false |
+| phone_number       | string | null: false |
+| orders_id | references | null: false foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :orders
 
-* Deployment instructions
+## orders テーブル
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| products_id        | string | references | null: false foreign_key: true |
+| buyer_id           | string | references | null: false foreign_key: true |
+### Association
 
-* ...
+- has_one :address
+- belongs_to :users
+- belongs_to :products
