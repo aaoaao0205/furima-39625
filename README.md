@@ -14,10 +14,10 @@
 
 ### Association
 
-- has_many :products
+- has_many :items 
 - has_many :orders
 
-## products テーブル
+## items テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | product_name       | string | null: false |
@@ -59,4 +59,4 @@
 
 - has_one :address
 - belongs_to :user
-- belongs_to :product
+- belongs_to :item
