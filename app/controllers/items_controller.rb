@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @items= Item.new
+    @item = Item.new
   end
 
   def create
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to '/' 
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
