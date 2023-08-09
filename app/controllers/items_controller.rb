@@ -1,10 +1,20 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
+
   def index
   end
 
   def new
     @items= Item.new
+  end
+
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to '/' 
+    else
+      render :new
+    end
   end
 
   private
