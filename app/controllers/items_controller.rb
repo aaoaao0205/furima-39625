@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -15,6 +16,13 @@ class ItemsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def item_order
+    @item = Item.find(params[:id])
+    return unless @item.order
+
+    redirect_to '/'
   end
 
   private
