@@ -16,5 +16,6 @@ class Item < ApplicationRecord
   validates :description, presence: true, length: { maximum: 1000 }
   validates :category_id, :condition_id, :shipping_fee_responsibility_id, :prefecture_id, :days_to_ship_id,
             numericality: { other_than: 0, message: "can't be blank" }
-  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  validates :price, presence: true,
+                    numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
