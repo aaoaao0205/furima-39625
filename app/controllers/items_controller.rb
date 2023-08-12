@@ -52,8 +52,8 @@ class ItemsController < ApplicationController
   end
 
   def require_owner
-    unless @item.user_id == current_user.id
-      redirect_to user_session_path
-    end
+    return if @item.user_id == current_user.id
+
+    redirect_to user_session_path
   end
 end
