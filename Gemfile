@@ -92,3 +92,4 @@ gem "turbo-rails"
 gem "stimulus-rails" 
 gem "pry-rails"
 gem 'payjp'
+gem 'gon'

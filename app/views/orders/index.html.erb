@@ -1,3 +1,4 @@
+<%= include_gon %>
 <%= render "shared/second-header"%>
 
 <div class='transaction-contents'>
@@ -34,7 +35,7 @@
     <%= form_with model: @orderform, url: item_orders_path(@item), data: { turbo: false },id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%= render 'shared/error_messages', model: f.object  %>
     <%# カード情報の入力 %>
-    <%= javascript_include_tag 'card' %>
+    <%#= javascript_include_tag 'card' %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力

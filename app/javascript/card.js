@@ -1,5 +1,6 @@
 const pay = () => {
-  const payjp = Payjp('pk_test_d0e41163d51a8a19adb04c33')
+  const publicKey = gon.public_key;
+  const payjp = Payjp(publicKey) 
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -11,7 +12,6 @@ const pay = () => {
 
   const form = document.getElementById('charge-form')
   form.addEventListener("submit", (e) => {
-
      payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
       } else {
