@@ -53,7 +53,7 @@
 ## orders テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| product            | string | references | null: false foreign_key: true |
+| item               | string | references | null: false foreign_key: true |
 | user               | string | references | null: false foreign_key: true |
 ### Association
 
