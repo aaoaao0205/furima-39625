@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
+  describe '商品購入' do
   before do
-    @orderform = FactoryBot.build(:order_form)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)   
+    @orderform = FactoryBot.build(:order_form, user_id: user.id, item_id: item.id)
+    sleep(1)
   end
 
-  describe '商品購入' do
     context '商品購入が出来る場合' do
       it '全ての必須項目が正しく入力されていれば購入できる' do
         expect(@orderform).to be_valid
@@ -84,14 +87,12 @@ RSpec.describe OrderForm, type: :model do
       end
 
       it 'user_idが紐付いていなければ購入ができない' do
-        @user = FactoryBot.build(:user)
         @orderform.user_id = nil
         @orderform.valid?
         expect(@orderform.errors.full_messages).to include("User can't be blank")
       end
 
       it 'item_idが紐付いていなければ購入ができない' do
-        @item = FactoryBot.build(:item)
         @orderform.item_id = nil
         @orderform.valid?
         expect(@orderform.errors.full_messages).to include("Item can't be blank")

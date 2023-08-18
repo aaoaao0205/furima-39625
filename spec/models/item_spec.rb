@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
+    @user = FactoryBot.build(:user)
   end
 
   describe '商品新規登録' do
@@ -116,7 +117,6 @@ RSpec.describe Item, type: :model do
       end
 
       it 'userが紐付いていなければ登録できない' do
-        @user = FactoryBot.build(:user)
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
